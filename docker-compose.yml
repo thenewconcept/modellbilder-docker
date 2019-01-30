@@ -1,0 +1,18 @@
+version: '3.1'
+services:
+  db:
+    image: mysql:5.5
+    environment:
+      - MYSQL_ROOT_PASSWORD=testpass
+      - MYSQL_DATABASE=modeldb
+    volumes:
+      - ./database:/var/lib/mysql
+  web:
+    image: thenewconcept/modellbilder:latest
+    depends_on:
+      - db
+    ports:
+      - "80:80"
+    volumes:
+      - ./app:/var/www/html
+
